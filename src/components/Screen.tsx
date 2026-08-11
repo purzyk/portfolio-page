@@ -55,17 +55,19 @@ export function Screen({
       style={mode === 'ratio' ? { aspectRatio: ratio } : undefined}
     >
       {/*
-        Horizontal scroll rather than downscaling: a 1400px-wide UI capture squeezed
-        into 360px is illegible. On a phone this scrolls inside the matte instead.
+        object-cover crops to fill the frame, anchored top-left so a UI capture's nav
+        doesn't get cropped off both sides. Below sm, object-contain instead: the whole
+        capture fits the width, letterboxed in the matte rather than requiring a scroll
+        to see the rest of it.
       */}
-      <div className='h-full w-full overflow-x-auto'>
+      <div className='h-full w-full'>
         <Image
           src={src}
           alt={alt}
           width={width}
           height={height}
           priority={priority}
-          className='block h-full w-full object-cover object-left-top max-sm:h-auto max-sm:w-auto max-sm:max-w-none'
+          className='block h-full w-full object-cover object-left-top max-sm:object-contain'
         />
       </div>
     </div>

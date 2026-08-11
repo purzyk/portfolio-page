@@ -4,6 +4,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * The mono label/meta tier (10-11.5px) is tuned for the desktop two-pane density and
+ * reads as faint on a phone even at compliant contrast — small text just costs more
+ * there. Bumped for mobile only, as a plain unlayered rule so it wins over the
+ * `@layer utilities` classes Tailwind emits regardless of source order, without
+ * touching the desktop scale or every call site.
+ */
+@media (max-width: 767px) {
+  .text-label-sm {
+    font-size: 12px;
+  }
+  .text-label {
+    font-size: 12.5px;
+  }
+  .text-meta {
+    font-size: 12.5px;
+  }
+  .text-chip {
+    font-size: 12.5px;
+  }
+  .text-ui {
+    font-size: 13px;
+  }
+  .text-badge {
+    font-size: 11px;
+  }
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;

@@ -71,7 +71,7 @@
   --color-text-heading: #e6edf1;
   --color-text-body: #c9d6dc; /* 12.6:1 */
   --color-text-secondary: #a9bac2; /* 9.3:1 */
-  --color-text-muted: #8496a0; /* 6.1:1 on page, 5.5:1 on panel */
+  --color-text-muted: #98aab4; /* 7.8:1 on page, 7.0:1 on panel — AAA both */
 
   /* The blue lifted from the Bridge/Studio UI, so screenshots read as native.
      Only 3.3:1 on white, which is why light uses a darker blue instead. */
