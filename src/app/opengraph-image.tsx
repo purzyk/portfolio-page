@@ -6,6 +6,7 @@ import { ImageResponse } from 'next/og'
  * duplicated from tokens.css: ImageResponse renders standalone, outside the page's CSS.
  */
 
+export const dynamic = 'force-static'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 

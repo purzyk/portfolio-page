@@ -15,6 +15,7 @@
     "format:check": "prettier --check \"{src,content}/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
   },
   "dependencies": {
+    "@next/third-parties": "^16.3.0",
     "@types/hast": "^3.0.5",
     "gray-matter": "^4.0.3",
     "next": "^15.1.3",

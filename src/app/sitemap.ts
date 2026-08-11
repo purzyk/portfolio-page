@@ -3,6 +3,8 @@ import { getCaseStudies } from '@/lib/content'
 import { SITE_URL } from '@/lib/site'
 import { WORK } from '@/lib/work'
 
+export const dynamic = 'force-static'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const studies = await getCaseStudies()
 

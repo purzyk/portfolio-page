@@ -1,9 +1,13 @@
+import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from 'next'
 import { DM_Mono, DM_Sans } from 'next/font/google'
 import type { ReactNode } from 'react'
 import { WindowBar } from '@/components/WindowBar'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
+
+// Unset in local dev on purpose, so browsing localhost doesn't pollute production analytics.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 // Self-hosted at build time by next/font — no third-party request, no layout shift.
 // Two weights of the sans and one of the mono is the whole set: the mono/sans split
@@ -117,6 +121,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </div>
           </div>
         </footer>
+
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>
     </html>
   )
