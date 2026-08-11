@@ -44,6 +44,10 @@ export function WorkRow({ item, selected, href, onSelect, startsGroup = false }:
             // Let the browser handle anything that means "somewhere else": new tab,
             // new window, download. Only the plain click becomes a pane swap.
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+            // Below the collapse point the pane isn't rendered (see WorkBrowser) — let
+            // the link navigate for real instead of swapping state nothing can show.
+            // 1024px matches Tailwind's default `lg` breakpoint used throughout.
+            if (!window.matchMedia('(min-width: 1024px)').matches) return
             event.preventDefault()
             onSelect()
           })
