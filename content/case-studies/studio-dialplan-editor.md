@@ -6,7 +6,7 @@ role: Sole front-end developer
 period: 2022-2026
 date: 2026-03-01
 featured: false
-draft: true
+draft: false
 tags:
   - TypeScript
   - React

@@ -6,7 +6,7 @@ role: Design and front-end development
 period: 2025-2026
 date: 2026-02-01
 featured: false
-draft: true
+draft: false
 tags:
   - TypeScript
   - Next.js
