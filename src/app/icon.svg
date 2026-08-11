@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Same mark as the window-bar wordmark: an accent dot inside a squared frame.
+       Values mirror tokens.css; a favicon can't reach CSS custom properties, so they're
+       duplicated here on purpose — keep in sync if the palette changes. -->
+  <style>
+    .bg { fill: #ffffff; }
+    .frame { stroke: #dde3e6; }
+    .dot { fill: #1b6ef3; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #0f1316; }
+      .frame { stroke: #232b31; }
+      .dot { fill: #3d8bff; }
+    }
+  </style>
+  <rect x="1.5" y="1.5" width="29" height="29" class="bg frame" stroke-width="1.5" />
+  <circle cx="16" cy="16" r="6" class="dot" />
+</svg>

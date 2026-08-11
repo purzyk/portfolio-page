@@ -1,0 +1,109 @@
+/**
+ * "Operator" design tokens.
+ *
+ * Source of truth for the site's look — Tailwind references these rather than
+ * duplicating the values, so retuning the system means editing this file only.
+ *
+ * Both themes define the same token names, which is what lets components be styled
+ * once (`bg-panel text-muted`) and work in light and dark with no `dark:` variants.
+ *
+ * Light is the base; dark overrides. Contrast ratios below were computed against the
+ * surface each token is actually used on, and verified rather than taken on trust.
+ */
+
+/* ---------- Light ---------- */
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --color-surface-page: #ffffff;
+  --color-surface-panel: #f2f6f9; /* selected list row, raised fills */
+  /* Hover sits deliberately short of the panel fill. Selection now persists while you
+     browse, so hover and selected are visible at the same time and must not look
+     alike — see WorkRow. */
+  --color-surface-hover: #f8fafb;
+  --color-surface-code: #0f1316; /* stays ink in BOTH themes — see note below */
+  --color-surface-code-inline: #e8edf0;
+
+  /* Text */
+  --color-text-primary: #0b1013; /* 19.1:1 AAA */
+  --color-text-heading: #101418; /* window-bar wordmark, role titles */
+  --color-text-body: #3f4b52; /* 9.0:1 AAA */
+  --color-text-secondary: #4b5860; /* 7.3:1 AAA — case-study lede */
+  --color-text-muted: #5c6a72; /* 5.6:1 on page, 5.1:1 on panel — AA both */
+
+  /* Accent — the only chromatic colour in the design.
+     4.59:1 on white, and 4.59:1 with white on top of it. Both sit 0.09 above the
+     AA floor, so this pair is load-bearing: do not darken the page or lighten the
+     blue without recomputing. */
+  --color-accent: #1b6ef3;
+  --color-accent-on: #ffffff; /* text/icon on an accent fill */
+  --color-accent-hover: #1560dc; /* 5.6:1 with white */
+  --color-accent-active: #1254c4; /* 6.8:1 with white */
+  --color-accent-code: #0b57c7; /* 5.6:1 on --color-surface-code-inline */
+
+  /* Lines */
+  --color-border: #dde3e6; /* structural: window frame, rail divider, panes */
+  --color-border-soft: #ebeff2; /* list-row separators */
+
+  /* Screenshot framing — light needs a bezel or dark UI shots read as holes. */
+  --color-screen-matte: #101418;
+  --color-screen-frame: #dde3e6;
+  --screen-matte-pad: 10px;
+
+  /* Focus — not authored in the comp; specified for the build. */
+  --color-focus-ring: #1b6ef3;
+
+  --color-selection: #cfe1fd;
+}
+
+/* ---------- Dark ---------- */
+.dark {
+  color-scheme: dark;
+
+  --color-surface-page: #0f1316;
+  --color-surface-panel: #171e23;
+  --color-surface-hover: #13191d; /* between page and panel, same as light */
+  --color-surface-code: #0b0f12; /* one step BELOW the page, so code recedes */
+  --color-surface-code-inline: #1a2227;
+
+  --color-text-primary: #f1f6f8; /* 17.1:1 */
+  --color-text-heading: #e6edf1;
+  --color-text-body: #c9d6dc; /* 12.6:1 */
+  --color-text-secondary: #a9bac2; /* 9.3:1 */
+  --color-text-muted: #8496a0; /* 6.1:1 on page, 5.5:1 on panel */
+
+  /* The blue lifted from the Bridge/Studio UI, so screenshots read as native.
+     Only 3.3:1 on white, which is why light uses a darker blue instead. */
+  --color-accent: #3d8bff;
+  --color-accent-on: #0f1316; /* ink on blue (5.6:1) — white would be 3.3:1 */
+  --color-accent-hover: #5a9cff; /* lighten in dark; darkening kills it */
+  --color-accent-active: #3d8bff;
+  --color-accent-code: #6fb4ff; /* 7.4:1 on --color-surface-code-inline */
+
+  --color-border: #232b31;
+  --color-border-soft: #1b2226;
+
+  /* No matte needed — the page is already darker than the screenshots. */
+  --color-screen-matte: transparent;
+  --color-screen-frame: #232b31;
+  --screen-matte-pad: 0px;
+
+  /* The page accent is too close to the panel fill to read as a ring on dark. */
+  --color-focus-ring: #6fb4ff;
+
+  --color-selection: #1d3a63;
+}
+
+/* ---------- Syntax — against --color-surface-code, which is ink in both themes ----------
+   Deliberately theme-independent: a light code block breaks the reading rhythm of the
+   case study, and the syntax palette has nowhere to go. The one intentional constant. */
+:root,
+.dark {
+  --syntax-plain: #e6edf1;
+  --syntax-comment: #7c8a93; /* 5.3:1 on code ground */
+  --syntax-keyword: #6fb4ff;
+  --syntax-string: #9ecbff;
+  --syntax-type: #b3a4ff;
+  --syntax-number: #ffb86b;
+}

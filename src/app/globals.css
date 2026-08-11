@@ -1,0 +1,232 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  ::selection {
+    background: var(--color-selection);
+  }
+
+  /**
+   * One focus style everywhere. Not authored in the comp — specified for the build,
+   * and load-bearing rather than compliance theatre: a list plus a pane is naturally
+   * keyboard-navigable, so the ring is how that navigation becomes visible.
+   *
+   * Radius 0 to match everything else. List rows override the offset to -2px so the
+   * ring sits inside the row instead of colliding with the 2px accent border.
+   */
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* Links are unstyled by default — this design underlines with a border where it
+     wants an underline, so a global rule would fight every component. */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+/**
+ * .prose — the case-study body.
+ *
+ * The Markdown renderer emits plain HTML with no classes, so everything is styled by
+ * element here. Measure is 66ch; the code block bleeds right to the window edge,
+ * which is the one deliberate asymmetry in the design.
+ */
+@layer components {
+  .prose {
+    @apply text-body text-ink-body;
+    max-width: 66ch;
+  }
+
+  /* ---- headings ---- */
+  /* An h2 opens a section and has to be findable when scanning a long piece, so it is
+     set in display sans at a size that outranks both the body and the h3s beneath it.
+     The accent survives as a rule above the heading rather than as the text colour:
+     at 11px mono the accent was the only thing making these visible, and it wasn't
+     enough — a section marker that is smaller than the prose it introduces reads as a
+     caption. */
+  .prose h2 {
+    @apply mb-4 mt-14 border-t border-border pt-7 text-title-section font-medium text-ink;
+  }
+
+  .prose h2::before {
+    @apply mb-3 block w-7 border-t-2 border-accent;
+    content: '';
+  }
+
+  /* First heading sits under the standfirst, which already provides separation. */
+  .prose h2:first-of-type {
+    @apply mt-10 border-t-0 pt-0;
+  }
+
+  /* An `hr` immediately before an h2 would stack a second rule above the heading's own.
+     Content files that still separate sections with `---` therefore drop the rule and
+     keep only its spacing, so both conventions render identically. */
+  .prose hr:has(+ h2) {
+    @apply border-t-0;
+  }
+
+  .prose hr + h2 {
+    @apply mt-0;
+  }
+
+  .prose h3 {
+    @apply mb-2.5 mt-8 text-row-title font-medium text-ink;
+  }
+
+  /* ---- body ---- */
+  .prose p {
+    @apply my-3.5;
+  }
+
+  .prose strong {
+    @apply font-medium text-ink;
+  }
+
+  .prose em {
+    @apply italic;
+  }
+
+  /* The standfirst under the h1 — set wider and looser than body. */
+  .prose > p:first-child {
+    @apply text-lede text-ink-secondary;
+    max-width: 60ch;
+  }
+
+  /* ---- lists ---- */
+  .prose ul,
+  .prose ol {
+    @apply my-3.5 pl-5;
+  }
+
+  .prose ul {
+    @apply list-disc;
+  }
+
+  .prose ol {
+    @apply list-decimal;
+  }
+
+  .prose li {
+    @apply my-1.5;
+  }
+
+  .prose li::marker {
+    @apply text-ink-muted;
+  }
+
+  /* ---- inline code ---- */
+  .prose :not(pre) > code {
+    @apply bg-code-inline px-1 font-mono text-accent-code;
+    font-size: 0.88em;
+  }
+
+  /* ---- code blocks ---- */
+  /* Ink ground in both themes: a light code block breaks the reading rhythm, and the
+     syntax palette has nowhere to go. The 2px left edge means "this is the current
+     thing", same as a selected row. The negative right margin bleeds it to the window
+     edge — keep it, it's the design's only asymmetry. */
+  .prose pre {
+    @apply my-7 overflow-x-auto border-l-current border-accent bg-code p-5 font-mono text-codeblock;
+    color: var(--syntax-plain);
+    margin-right: -52px;
+    tab-size: 2;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  /* ---- tables ---- */
+  .prose .table-wrap {
+    @apply my-7 overflow-x-auto;
+  }
+
+  .prose table {
+    @apply w-full border-collapse text-body-sm;
+  }
+
+  .prose thead {
+    @apply border-b border-border;
+  }
+
+  .prose th {
+    @apply px-2 py-2.5 text-left font-mono text-meta uppercase text-ink-muted;
+  }
+
+  .prose tbody tr {
+    @apply border-b border-border-soft;
+  }
+
+  .prose td {
+    @apply px-2 py-2.5 align-top;
+  }
+
+  /* ---- blockquote ---- */
+  .prose blockquote {
+    @apply my-7 border-l border-border pl-5 text-ink-secondary;
+  }
+
+  /* ---- figures ---- */
+  .prose figure {
+    @apply my-9;
+  }
+
+  /* A clip is framed exactly like a screenshot — same 1px frame, same light-mode matte —
+     so the two sit together without reading as different kinds of object. */
+  .prose figure img,
+  .prose figure video {
+    @apply block w-full border border-screen-frame bg-screen-matte;
+    padding: var(--screen-matte-pad);
+  }
+
+  .prose figcaption {
+    @apply mt-2.5 font-mono text-meta text-ink-muted;
+  }
+
+  /* ---- rules ---- */
+  .prose hr {
+    @apply my-12 border-0 border-t border-border-soft;
+  }
+
+  /* Below 720px the code block loses its bleed and scrolls instead. */
+  @media (max-width: 719px) {
+    .prose {
+      max-width: 100%;
+    }
+
+    .prose pre {
+      margin-right: 0;
+    }
+  }
+}
+
+/**
+ * Shiki emits inline colours for both themes and toggles them by CSS variable.
+ * The code ground is ink in both themes, so both map to the dark palette.
+ */
+@layer components {
+  .prose pre code span {
+    color: var(--shiki-dark);
+  }
+}
