@@ -2,6 +2,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from 'next'
 import { DM_Mono, DM_Sans } from 'next/font/google'
 import type { ReactNode } from 'react'
+import { EmailLink } from '@/components/EmailLink'
 import { WindowBar } from '@/components/WindowBar'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
@@ -37,8 +38,9 @@ export const metadata: Metadata = {
     'Front-end developer in Wrocław. Eleven years building for the web, the last four on browser-based telephony.',
 }
 
+// Email lives in EmailLink, not here — kept out of the static HTML entirely
+// rather than just out of this list. See that component for why.
 const SOCIAL = [
-  { href: 'mailto:piotr@purzycki.pl', label: 'piotr@purzycki.pl' },
   { href: 'https://www.linkedin.com/in/piotr-purzycki/', label: 'linkedin.com/in/piotr-purzycki' },
   { href: 'https://github.com/purzyk', label: 'github.com/purzyk' },
 ] as const
@@ -55,7 +57,7 @@ const personJsonLd = {
   url: SITE_URL,
   image: `${SITE_URL}/work/Piotr-Purzycki.jpg`,
   address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
-  sameAs: SOCIAL.filter((link) => !link.href.startsWith('mailto:')).map((link) => link.href),
+  sameAs: SOCIAL.map((link) => link.href),
 }
 
 /**
@@ -108,6 +110,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className='flex flex-col items-start gap-3.5 sm:flex-row sm:items-center sm:justify-between'>
             <span>Piotr Purzycki · front-end developer · Wrocław</span>
             <div className='flex flex-wrap gap-4'>
+              <EmailLink className='border-b border-border pb-0.5 no-underline transition-colors duration-row hover:border-ink hover:text-ink' />
               {SOCIAL.map((link) => (
                 <a
                   key={link.href}
