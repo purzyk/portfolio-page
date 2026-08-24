@@ -77,7 +77,7 @@ export function WorkBrowser({ initialSlug }: { initialSlug?: string }) {
           </p>
 
           <p className='mt-4 font-mono text-ui text-accent'>Currently looking for my next role.</p>
-          <p className='mt-1 font-mono text-ui text-ink-muted'>React · TypeScript · Next.js</p>
+          <p className='mt-1 font-mono text-ui text-ink-muted'>React · TypeScript · Next.js · WordPress</p>
         </div>
 
         <h2 className='px-5.5 py-4 font-mono text-label-sm uppercase text-ink-muted'>
