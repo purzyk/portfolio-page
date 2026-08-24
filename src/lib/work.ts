@@ -114,7 +114,7 @@ export const WORK: WorkItem[] = [
     },
     clip: {
       src: '/work/studio-dialplan-editor.mp4',
-      poster: '/work/studio-dialplan-editor.jpg',
+      poster: '/work/studio-dialplan-editor-poster.jpg',
       caption:
         'Building a call flow: dropping in an IVR menu, configuring it through a wizard, and dragging nodes into the tree.',
     },
