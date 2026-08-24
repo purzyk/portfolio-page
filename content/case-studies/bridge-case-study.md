@@ -25,8 +25,8 @@ before you transfer. It sits on a cloud PBX and consumes a live stream of call e
 over XMPP. Deployed across seven reseller brands.
 
 I was the sole front-end developer on it for four years — around 520 commits, second only
-to the engineer who started it, out of twelve-plus contributors. Four parts of that are
-worth writing down.
+to the engineer who started it, out of twelve-plus contributors. Four things stood out from
+those four years.
 
 ## 1. Calls
 
@@ -41,8 +41,8 @@ consult, transfer, and a second incoming call while you're already talking all h
 be representable at once.
 
 That state machine ended up as the single densest thing I owned in the app, and the
-reason is unglamorous: **a phone has more states than it looks like it has, and users
-notice all of them.** A button that says "transfer" has to know whether the other side
+reason is unglamorous: a phone has more states than it looks like it has, and users
+notice all of them. A button that says "transfer" has to know whether the other side
 has answered yet, because attended and unattended transfer are different operations
 with different failure modes.
 
@@ -54,9 +54,9 @@ a `console.log` that broke under Electron, code-signing on macOS.
 
 ![Placing a call from a browser tab — dialling, ringing, answered, hung up. No plugin, no desktop app.](/work/bridge-webrtc-call.mp4)
 
-Worth noting where that ended: the desktop builds were eventually retired, because
-around 99% of users chose the browser version. Some of the fiddliest work in this
-project was maintenance on something the product later dropped.
+The desktop builds were eventually retired: around 99% of users had already moved to the
+browser version. Some of the fiddliest work in this project was maintenance on something
+the product later dropped.
 
 ## 2. Call history
 
@@ -64,8 +64,8 @@ Bridge showed your _current_ calls. It had no history — step away from your de
 back, and you had no idea who had tried to reach you.
 
 Add call history to a softphone. Sounds like a list view. It took two architectural
-rewrites and about twenty-five distinct call scenarios, because **"did I miss this call?"
-turns out not to be a question the telephony platform answers directly.**
+rewrites and about twenty-five distinct call scenarios, because "did I miss this call?"
+turns out not to be a question the telephony platform answers directly.
 
 ![What shipped. Missed, incoming and outgoing, grouped by day — the part that looked like the whole job.](/work/bridge-call-history-list-view.png)
 
@@ -86,8 +86,8 @@ talking gets a genuine second call, so yes.
 We settled the forwarding question empirically rather than by opinion: I tested what
 physical desk phones do. On busy, no-answer and unavailable, both Snom and Yealink
 register a missed call — so Bridge does. On _always_, neither handset registers anything,
-so Bridge doesn't either. That principle — **match the physical phone, because users have
-one on their desk** — resolved several later arguments.
+so Bridge doesn't either. That principle — match the physical phone, because users have
+one on their desk — resolved several later arguments.
 
 One case we couldn't fix. Snom and Yealink handle semi-attended transfer differently at
 the PBX level, so the events Bridge receives genuinely differ by vendor. After several
@@ -135,7 +135,7 @@ The codebase predated most of what it now uses: class components with Redux `con
 SASS, TSLint, Webpack, Node 12 in CI. The modernisation plan arrived as a nine-item list
 from one of the platform's architects in December 2022 — upgrade dependencies, convert to
 functional components, Redux Toolkit and RTK Query, Tailwind, fix the Mac CI build, drop
-the dead API v2 path. **My job was to execute it.**
+the dead API v2 path. My job was to execute it.
 
 There was never a version where the app stopped. Bridge isn't a dashboard — it's what's on
 someone's screen while a customer is on the line, so a regression means a missed call.
@@ -180,15 +180,3 @@ enough subsequent refactoring that the tests paid for themselves within a week.
 
 Fixtures use absolute timestamps rather than values relative to `now`, with time frozen
 via `cy.clock`, so a result doesn't depend on the date the suite happens to run.
-
-## What it demonstrates
-
-- Building on a **real-time event stream**, reconstructing state from fragments across
-  multiple call legs
-- **WebRTC in production** — SIP registration, device handling, multi-call state
-- **Incremental migration of a live application** — no big-bang rewrite, no feature freeze,
-  on software where a regression means a missed call
-- **Introducing testing** to a codebase that had none, including deterministic tests for
-  time-dependent UI
-- **Taking review seriously** — knowing which comments to act on and which to push back on
-- Participating in **product decisions**, not just implementing them

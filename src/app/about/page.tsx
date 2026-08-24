@@ -26,7 +26,7 @@ const HISTORY = [
     period: '2015 — 2022',
     role: 'Front-end developer',
     org: 'Freelance',
-    body: 'WordPress themes built to the pixel from Photoshop and XD layouts. Explain Everything, the Greyhound Board of Great Britain and Port Praski are all still live.',
+    body: 'WordPress themes built to the pixel from Photoshop and XD layouts. Explain Everything and the Greyhound Board of Great Britain are both still live.',
   },
 ] as const
 
@@ -56,9 +56,9 @@ const SKILLS = [
 ] as const
 
 const PRINCIPLES = [
-  'Give me a problem and leave me alone — I will flag the decisions worth making, not ask permission on the rest.',
-  'If I say it will be done, it is done. No chasing.',
-  'New tools get learned on the job, not before it.',
+  'Comfortable working from a problem rather than a fully specified task — I flag the decisions worth a conversation and make the rest myself.',
+  'If I estimate something, I meet it, or say early if I won’t.',
+  'Pick up new tools as a project needs them, rather than requiring them going in.',
 ] as const
 
 export default function AboutPage() {
@@ -87,7 +87,8 @@ export default function AboutPage() {
       {/* ---- main ---- */}
       <article className='min-w-0 max-w-about px-4 pb-14 pt-9 sm:px-7 lg:px-13'>
         <h1 className='text-title-page font-medium text-ink'>
-          Eleven years building for the web, most of it as the only front-end person in the room.
+          Eleven years building for the web, most of it as the only front-end developer on the
+          team.
         </h1>
 
         <div className='mt-6 max-w-role space-y-4 text-prose text-ink-body'>

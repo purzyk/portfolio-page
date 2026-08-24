@@ -88,18 +88,18 @@ decisions to present at once to someone who doesn't think about telephony for a 
 
 Three things made this harder than a nested form.
 
-**The nesting is unbounded and the shape is irregular.** A branching node holds a list of
+The nesting is unbounded and the shape is irregular. A branching node holds a list of
 *named branches*, each holding its own list of steps, each of which may branch again. The
 saved document is one tree, so the state has to be one tree too, and every edit is a write
 to some arbitrary path inside it. This lives in a Redux slice; RTK Query owns the server
 data, the slice owns the in-progress edit.
 
-**Depth is legibility's enemy.** Four levels of nesting is normal for a real call flow, and
+Depth works against legibility. Four levels of nesting is normal for a real call flow, and
 a naive rendering of that is unreadable. The editor indents, draws the branch structure, and
 lets any subtree collapse — plus a global collapse, because the fastest way to understand a
 big plan is to see its shape with the detail folded away.
 
-**A bad edit takes a phone number off the air.** There is no staging environment for a phone
+A bad edit takes a phone number off the air. There is no staging environment for a phone
 number: the call flow you're editing is the one answering calls. So the editor does not save
 as you type. You build up changes on a canvas and commit them deliberately with **Save
 changes** — one explicit moment, one write of the whole tree, so a half-finished edit never
@@ -109,14 +109,13 @@ reaches the platform.
 
 ## Guardrails
 
-This is the section that made self-service possible, and the most interesting engineering
-in the piece.
+This is what made self-service possible.
 
 The obvious guardrail is the one at the moment of saving: nothing reaches the platform
 until you press the button, and you get an explicit confirmation when it lands. That's
 necessary but shallow — it protects against a half-finished edit, not a confident wrong one.
 
-The one worth writing about is deletion. A prompt — a recorded message — can be referenced
+The harder guardrail is deletion. A prompt — a recorded message — can be referenced
 from dial plans, queues, voicemails, IVR menus, DTMF inputs. Deleting one that's in use is
 the easiest way for an admin to break a live number without doing anything that feels
 dangerous. So prompts carry a usage count in the overview, and deletion is not one rule but
@@ -138,19 +137,3 @@ valid and something has actually changed, so the failure mode is a button that w
 up rather than an error after the fact.
 
 ![Creating a voicemail. The submit button stays disabled until every required field is valid.](/work/studio-voicemail-create.mp4)
-
----
-
-## What it demonstrates
-
-- Modelling and editing **recursive, irregularly-shaped state** — a tree of branching nodes,
-  held in Redux, saved as one document
-- **Complex interactive UI** — drag-and-drop across nesting levels, collapsible subtrees,
-  type-dependent inspectors, multi-step wizards
-- **Designing for non-technical users** on high-stakes software, where the guardrails are
-  the feature and the interesting decisions are about what to forbid
-- Reading a **domain** properly — the IVR/DTMF versus queue/voicemail distinction is a
-  telephony fact before it's a UI rule, and getting it wrong in either direction is either
-  unsafe or needlessly restrictive
-- Owning a **product surface end to end** for four years — queues, prompts, voicemails, the
-  shared table and form components, and the localisation both languages ran on
