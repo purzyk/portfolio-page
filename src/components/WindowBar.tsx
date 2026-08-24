@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 /**
  * The window's title bar: wordmark on the left, nav on the right.
@@ -30,10 +31,10 @@ export function WindowBar() {
   const pathname = usePathname()
 
   return (
-    <div className='sticky top-0 z-30 flex h-bar flex-none items-center justify-between border-b border-border bg-page px-4.5 sm:px-4.5'>
+    <div className='sticky top-0 z-30 flex h-bar flex-none items-center justify-between overflow-x-auto border-b border-border bg-page px-3 sm:px-4.5'>
       <Link
         href='/'
-        className='flex items-center gap-2 font-mono text-ui no-underline'
+        className='flex flex-none items-center gap-1.5 font-mono text-ui no-underline'
         aria-label='Piotr Purzycki — home'
       >
         <span className='h-[9px] w-[9px] flex-none rounded-full bg-accent' aria-hidden />
@@ -43,7 +44,7 @@ export function WindowBar() {
         <span className='hidden text-ink-muted sm:inline'>front-end developer · wrocław</span>
       </Link>
 
-      <nav className='flex items-center gap-2'>
+      <nav className='flex flex-none items-center gap-1 sm:gap-2'>
         {NAV.map((item) => {
           const current = isCurrent(pathname, item.href)
           return (
@@ -52,7 +53,7 @@ export function WindowBar() {
               href={item.href}
               aria-current={current ? 'page' : undefined}
               className={[
-                'border px-2.5 py-1 font-mono text-label-sm no-underline transition-colors duration-row',
+                'border px-1.5 py-1 font-mono text-label-sm no-underline transition-colors duration-row sm:px-2.5',
                 'flex min-h-touch items-center sm:min-h-0',
                 current
                   ? 'border-accent text-accent'
@@ -68,10 +69,12 @@ export function WindowBar() {
         <a
           href='/work/Piotr-Purzycki-CV-Frontend-Engineer.pdf'
           download
-          className='flex min-h-touch items-center border border-border px-2.5 py-1 font-mono text-label-sm text-ink-muted no-underline transition-colors duration-row hover:border-ink hover:text-ink sm:min-h-0'
+          className='flex min-h-touch items-center border border-border px-1.5 py-1 font-mono text-label-sm text-ink-muted no-underline transition-colors duration-row hover:border-ink hover:text-ink sm:min-h-0 sm:px-2.5'
         >
           cv.pdf
         </a>
+
+        <ThemeToggle />
       </nav>
     </div>
   )

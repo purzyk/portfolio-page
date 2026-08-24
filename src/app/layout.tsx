@@ -1,7 +1,7 @@
-import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from 'next'
 import { DM_Mono, DM_Sans } from 'next/font/google'
 import type { ReactNode } from 'react'
+import { CookieConsent } from '@/components/CookieConsent'
 import { EmailLink } from '@/components/EmailLink'
 import { WindowBar } from '@/components/WindowBar'
 import { SITE_URL } from '@/lib/site'
@@ -123,9 +123,35 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               ))}
             </div>
           </div>
+
+          {/* Only worth showing where there's a consent choice to manage — GA_ID is
+              unset in local dev on purpose (see above), and CookieConsent along with
+              it, so `data-cookie-settings` would otherwise sit here with nothing
+              mounted to read it. */}
+          {GA_ID && (
+            <div className='mt-3.5 flex flex-wrap gap-4 border-t border-border-soft pt-3.5'>
+              <a
+                href='/privacy'
+                className='border-b border-border pb-0.5 no-underline transition-colors duration-row hover:border-ink hover:text-ink'
+              >
+                Privacy &amp; cookies
+              </a>
+              {/* `data-cookie-settings` is read by CookieConsent's own delegated click
+                  listener, not a prop — RODO requires withdrawing consent to be as
+                  easy as giving it, and this button has to reopen the banner
+                  regardless of which choice was already made. */}
+              <button
+                type='button'
+                data-cookie-settings
+                className='cursor-pointer border-b border-border pb-0.5 transition-colors duration-row hover:border-ink hover:text-ink'
+              >
+                Cookie settings
+              </button>
+            </div>
+          )}
         </footer>
 
-        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
+        {GA_ID && <CookieConsent gaId={GA_ID} />}
       </body>
     </html>
   )
