@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Clip } from '@/components/Clip'
 import { Screen } from '@/components/Screen'
 import type { WorkItem } from '@/lib/work'
 
@@ -82,15 +83,26 @@ export function WorkPane({ item }: { item: WorkItem }) {
         </ul>
       </div>
 
-      <Screen
-        src={item.image.src}
-        alt={item.image.alt}
-        width={item.image.width}
-        height={item.image.height}
-        mode='fill'
-        priority
-        className='mx-7 mb-7'
-      />
+      {item.clip ? (
+        <Clip
+          src={item.clip.src}
+          poster={item.clip.poster}
+          caption={item.clip.caption}
+          mode='fill'
+          eager
+          className='mx-7 mb-7'
+        />
+      ) : (
+        <Screen
+          src={item.image.src}
+          alt={item.image.alt}
+          width={item.image.width}
+          height={item.image.height}
+          mode='fill'
+          priority
+          className='mx-7 mb-7'
+        />
+      )}
     </article>
   )
 }

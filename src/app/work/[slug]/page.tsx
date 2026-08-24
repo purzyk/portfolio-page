@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Clip } from '@/components/Clip'
 import { Screen } from '@/components/Screen'
 import { WorkBrowser } from '@/components/WorkBrowser'
 import { getCaseStudies, getCaseStudy } from '@/lib/content'
@@ -143,15 +144,25 @@ export default async function WorkDetailPage({ params }: Props) {
             </p>
           )}
 
-          <Screen
-            src={item.image.src}
-            alt={item.image.alt}
-            width={item.image.width}
-            height={item.image.height}
-            mode='ratio'
-            priority
-            className='mt-7'
-          />
+          {item.clip ? (
+            <Clip
+              src={item.clip.src}
+              poster={item.clip.poster}
+              caption={item.clip.caption}
+              eager
+              className='mt-7'
+            />
+          ) : (
+            <Screen
+              src={item.image.src}
+              alt={item.image.alt}
+              width={item.image.width}
+              height={item.image.height}
+              mode='ratio'
+              priority
+              className='mt-7'
+            />
+          )}
         </article>
       </>
     )

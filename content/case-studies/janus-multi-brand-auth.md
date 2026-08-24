@@ -117,17 +117,17 @@ their own: the TOTP challenge is a login flow requesting a higher assurance leve
 setup is a settings flow. The implementation branches on what the flow asks for, not on
 where the user is in it.
 
-![The second factor. Six cells with paste and arrow-key traversal, and Verify disabled until the code is complete.](/work/janus-totp-challenge.png)
+![Signing in with two-step verification already set up. Six cells with paste and arrow-key traversal, Verify disabled until the code is complete — a wrong code rejected before the real one lands.](/work/janus-totp-challenge.mp4)
 
 A wrong code follows the same rule as a wrong password — fixable right now, so it stays on
 the page and the flow survives — with a message that says only that the code didn't match.
 
-The harder problem: **Kratos has no way to force a user to set up MFA.** You can require a
+The harder problem: Kratos has no way to force a user to set up MFA. You can require a
 second factor at sign-in, but not that one exists. So the gate sits at the consent step —
 the moment an OAuth session would be issued — and refuses to issue one while enrolment is
 outstanding, diverting the user into setup and resuming the original flow afterwards.
 
-![The enrolment gate. A user whose account requires a second factor but hasn't set one up is diverted here instead of receiving a token.](/work/janus-mfa-setup.png)
+![Signing in, correcting a wrong password, then diverted into enrolment: scanning or copying the secret, confirming with a code, a rejected one along the way before the real one lands.](/work/janus-totp-setup.mp4)
 
 It defers rather than traps: "Cancel and set up later" exists because a user locked out at
 sign-in with no way past is a support call. The pending challenge crosses the detour in a
@@ -135,18 +135,3 @@ short-lived HttpOnly cookie, since Kratos hands control back with only a flow ID
 cookie only ever selects which challenge to resume. Whether enrolment is actually complete
 is re-checked against Kratos every time: a cookie deciding whether you get a token is a
 vulnerability, not a convenience.
-
----
-
-## What it demonstrates
-
-- **Designing and building the same product** — mockups, stakeholder review, then the
-  implementation, with the design decisions traceable into the code
-- **Identity as a domain**: OAuth 2.0 and OIDC flows, Ory Kratos and Hydra, consent and
-  logout challenges, assurance levels, TOTP enrolment
-- **Security reasoning that survives contact with an attacker** — knowing which pieces of
-  state are conveniences and which are boundaries, and re-checking the ones that matter
-- **Multi-tenancy from a single deployment** — per-request brand resolution, tokenised
-  palettes, and a preview mechanism that survives a redirect chain through a third party
-- **Working to a compliance deadline** with a scope drawn deliberately tight, and an
-  architecture chosen so the things left out stay possible

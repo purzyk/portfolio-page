@@ -17,6 +17,13 @@ export interface WorkImage {
   height: number
 }
 
+export interface WorkClip {
+  src: string
+  poster: string
+  /** Read by screen readers and shown if the file fails to load. */
+  caption: string
+}
+
 export interface WorkItem {
   slug: string
   title: string
@@ -47,6 +54,12 @@ export interface WorkItem {
     note: string
   }
   image: WorkImage
+  /**
+   * A short looping recording, used in place of `image` where one exists — the pane
+   * should show the product moving rather than a single frame of it. Falls back to
+   * `image` when absent, which is every item without a recording yet.
+   */
+  clip?: WorkClip
 }
 
 export const WORK: WorkItem[] = [
@@ -69,12 +82,16 @@ export const WORK: WorkItem[] = [
       note: '“Show me around” — no login',
     },
     image: {
-      // TODO: the list-view capture reads "You currently have no calls" with two
-      // thirds empty. Swap for the details shot when the content pass reaches Bridge.
       src: '/work/bridge-call-history-details.png',
       alt: 'Bridge call history with a call expanded, showing the queue it arrived through and notes taken during it',
       width: 1400,
       height: 900,
+    },
+    clip: {
+      src: '/work/bridge-webrtc-call.mp4',
+      poster: '/work/bridge-webrtc-call-poster.jpg',
+      caption:
+        'Placing a call from a browser tab — dialling, ringing, answered, hung up. No plugin, no desktop app.',
     },
   },
   {
@@ -95,6 +112,12 @@ export const WORK: WorkItem[] = [
       width: 1440,
       height: 900,
     },
+    clip: {
+      src: '/work/studio-dialplan-editor.mp4',
+      poster: '/work/studio-dialplan-editor.jpg',
+      caption:
+        'Building a call flow: dropping in an IVR menu, configuring it through a wizard, and dragging nodes into the tree.',
+    },
   },
   {
     slug: 'janus',
@@ -113,6 +136,40 @@ export const WORK: WorkItem[] = [
       alt: 'Janus sign-in screen in the Studio brand — blue accent on a navy ground',
       width: 1440,
       height: 900,
+    },
+    clip: {
+      src: '/work/janus-totp-setup.mp4',
+      poster: '/work/janus-totp-setup-poster.jpg',
+      caption:
+        'Signing in, correcting a wrong password, and setting up two-step verification — including a rejected code before the right one lands.',
+    },
+  },
+  {
+    slug: 'grid',
+    title: 'Grid Architekci',
+    kind: 'architecture studio site',
+    group: 'freelance',
+    year: '2026',
+    stackShort: 'wordpress',
+    blurb:
+      'A twenty-year-old architecture studio, an eight-year-old site with no written project descriptions and a Google score to match. Redesigned in Claude, rebuilt as WordPress blocks, migrated automatically from the old database, and translated into English — without losing a URL Google already knew.',
+    stack: ['WordPress', 'Gutenberg blocks', 'Tailwind CSS', 'WPML', 'PHP'],
+    link: 'case-study',
+    caseStudy: 'grid-architekci-rebuild',
+    demo: {
+      href: 'https://grid.net.pl/en/',
+      note: 'Live site',
+    },
+    image: {
+      src: '/work/grid.jpg',
+      alt: 'The Grid Architekci homepage, showing the project grid with category filters',
+      width: 1440,
+      height: 811,
+    },
+    clip: {
+      src: '/work/grid-walkthrough.mp4',
+      poster: '/work/grid-walkthrough-poster.jpg',
+      caption: 'From the project grid into a house in Krzyki, Wrocław.',
     },
   },
   {
@@ -133,6 +190,12 @@ export const WORK: WorkItem[] = [
       width: 1440,
       height: 900,
     },
+    clip: {
+      src: '/work/explain-everything-walkthrough.mp4',
+      poster: '/work/explain-everything-walkthrough-poster.jpg',
+      caption:
+        'Scrolling the homepage, then following the "For school" link into its own page and down to the footer.',
+    },
   },
   {
     slug: 'gbgb',
@@ -152,24 +215,11 @@ export const WORK: WorkItem[] = [
       width: 1440,
       height: 900,
     },
-  },
-  {
-    slug: 'port-praski',
-    title: 'Port Praski',
-    kind: 'property development',
-    group: 'freelance',
-    year: '2019',
-    stackShort: 'wordpress',
-    blurb:
-      'A riverside district being rebuilt in Warsaw. Property listings, interactive site plans, and the slow-scrolling photography a developer’s marketing site runs on.',
-    stack: ['WordPress', 'Custom theme', 'SCSS', 'JavaScript', 'Vue.js'],
-    link: 'external',
-    href: 'https://portpraski.pl/',
-    image: {
-      src: '/work/port-praski.jpg',
-      alt: 'The Port Praski homepage',
-      width: 1440,
-      height: 900,
+    clip: {
+      src: '/work/gbgb-walkthrough.mp4',
+      poster: '/work/gbgb-walkthrough-poster.jpg',
+      caption:
+        'From the results table into a greyhound’s race history, then through Welfare & Care into the Greyhound Retirement page.',
     },
   },
 ]
