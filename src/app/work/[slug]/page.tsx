@@ -57,6 +57,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: study.title,
       description: study.subtitle,
       type: 'article',
+      siteName: 'Piotr Purzycki',
+      locale: 'en_GB',
+      authors: ['Piotr Purzycki'],
+      ...(study.date && { publishedTime: study.date }),
+      // Setting openGraph here replaces the root's, which drops the generated image.
+      images: [{ url: '/opengraph-image', width: 1200, height: 630, type: 'image/png' }],
     },
   }
 }

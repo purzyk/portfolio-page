@@ -38,6 +38,12 @@ export const metadata: Metadata = {
   },
   description:
     'Front-end developer in Wrocław. Eleven years building for the web, the last four on browser-based telephony.',
+  authors: [{ name: 'Piotr Purzycki', url: SITE_URL }],
+  openGraph: {
+    type: 'website',
+    siteName: 'Piotr Purzycki',
+    locale: 'en_GB',
+  },
 }
 
 // Email lives in EmailLink, not here — kept out of the static HTML entirely

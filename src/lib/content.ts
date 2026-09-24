@@ -48,7 +48,13 @@ function parse(slug: string, raw: string): CaseStudy {
     role: typeof data.role === 'string' ? data.role : undefined,
     period: typeof data.period === 'string' ? data.period : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-    date: typeof data.date === 'string' ? data.date : undefined,
+    // YAML reads an unquoted 2026-04-10 as a Date, not a string.
+    date:
+      data.date instanceof Date
+        ? data.date.toISOString().slice(0, 10)
+        : typeof data.date === 'string'
+          ? data.date
+          : undefined,
     featured: data.featured === true,
     draft: data.draft === true,
     body: content,
