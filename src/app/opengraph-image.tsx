@@ -28,7 +28,7 @@ export default function Image() {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
           <div style={{ width: 16, height: 16, borderRadius: 999, backgroundColor: '#3d8bff' }} />
-          <div style={{ fontSize: 28 }}>piotr purzycki</div>
+          <div style={{ fontSize: 28 }}>Piotr Purzycki</div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>

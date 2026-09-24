@@ -39,9 +39,9 @@ export function WindowBar() {
       >
         <span className='h-[9px] w-[9px] flex-none rounded-full bg-accent' aria-hidden />
         {/* nowrap: the bar is a fixed 46px and two lines would burst it. */}
-        <span className='whitespace-nowrap text-ink-heading'>piotr purzycki</span>
+        <span className='whitespace-nowrap text-ink-heading'>Piotr Purzycki</span>
         {/* Dropped below 720px — the bar has room for the wordmark and nav only. */}
-        <span className='hidden text-ink-muted sm:inline'>front-end developer · wrocław</span>
+        <span className='hidden text-ink-muted sm:inline'>front-end developer · Wrocław</span>
       </Link>
 
       <nav className='flex flex-none items-center gap-1 sm:gap-2'>
