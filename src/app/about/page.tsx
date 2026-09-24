@@ -20,7 +20,7 @@ const HISTORY = [
     period: '2022 — 2026',
     role: 'Sole front-end developer',
     org: 'Talksome',
-    body: 'Bridge (browser softphone), Studio (call-flow editor) and Janus (centralised sign-in across reseller brands). Top contributor to Studio, and the whole of Janus — which I designed as well as built, taking the screens through review with stakeholders. Owned the front end end to end: design, architecture, build, tests, releases.',
+    body: 'Bridge (browser softphone), Studio (call-flow editor) and a centralised sign-in service shared across reseller brands. Top contributor to Studio, and the whole of the sign-in service — which I designed as well as built, taking the screens through review with stakeholders. Owned the front end end to end: design, architecture, build, tests, releases.',
   },
   {
     period: '2015 — 2022',

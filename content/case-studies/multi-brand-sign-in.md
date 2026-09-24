@@ -1,7 +1,7 @@
 ---
 title: Replacing the login on two live products without anyone noticing
 subtitle: An ISO certification needed multi-factor auth, which meant moving two products onto a central identity provider. I designed it and built it — to a brief where success meant users noticing nothing but a changed address bar.
-company: Compass Janus
+company: Compass
 role: Design and front-end development
 period: 2025-2026
 date: 2026-02-01
@@ -28,7 +28,7 @@ ship an identity provider that nobody notices, then add MFA on top of it once it
 
 I designed the screens and built the front end.
 
-![The sign-in page. One deployment, one set of components, themed per reseller domain.](/work/janus-login-studio.png)
+![The sign-in page. One deployment, one set of components, themed per reseller domain.](/work/signin-login-studio.png)
 
 ---
 
@@ -38,7 +38,7 @@ Compass is a cloud phone platform sold through resellers. Studio and Bridge, its
 ends, each authenticated on their own — meaning MFA would need to be built twice, kept
 consistent twice, and would still leave no single sign-on.
 
-Janus is the third application: a standalone Next.js app that owns sign-in for both. It
+The sign-in service is the third application: a standalone Next.js app that owns sign-in for both. It
 runs OAuth2 and OIDC flows through Ory Hydra and authenticates against Ory Kratos, so
 credentials and second factors live in one place with one implementation. Studio and Bridge
 become OAuth clients that redirect to it.
@@ -46,7 +46,7 @@ become OAuth clients that redirect to it.
 Single sign-on and federated login were explicitly out of scope for this release, but OIDC
 was chosen specifically so they become possible later without another migration.
 
-Janus is the newest of the three and the only one I built from an empty repository.
+It is the newest of the three and the only one I built from an empty repository.
 
 ---
 
@@ -81,7 +81,7 @@ folded their feedback back into the design:
   a user who walks away from an expiring session shouldn't come back to one that's silently
   expired a second time.
 
-![Inline validation on the sign-in form. Failures that a user can immediately correct stay on the page.](/work/janus-login-validation.png)
+![Inline validation on the sign-in form. Failures that a user can immediately correct stay on the page.](/work/signin-login-validation.png)
 
 The error model that came out of this review is a rule rather than a set of cases: if the
 user can fix it right now — wrong password, wrong TOTP code — it renders inline and the
@@ -89,7 +89,7 @@ flow survives. If the flow itself is gone, that's a terminal page with a route b
 application they started from. What an error is allowed to reveal is deliberately thin: a
 failed sign-in doesn't say which half you got wrong.
 
-![The terminal failure page. Reached when the flow itself has expired, with a route back into the application that started it.](/work/janus-signin-failed.png)
+![The terminal failure page. Reached when the flow itself has expired, with a route back into the application that started it.](/work/signin-failed.png)
 
 ---
 
@@ -100,7 +100,7 @@ matched against a table of domains, longest match winning. Everything downstream
 palette, logo, its dimensions — follows from that one lookup, set by a theme class on
 `<body>`.
 
-![The same page on a different reseller domain. One deployment, one component set, resolved from the hostname.](/work/janus-login-everwhite.png)
+![The same page on a different reseller domain. One deployment, one component set, resolved from the hostname.](/work/signin-login-second-brand.png)
 
 QA needs to preview a brand on a host that doesn't resolve to it, so there's a `?theme=`
 override — but sign-in leaves the application and comes back through Kratos, and a query
@@ -117,7 +117,7 @@ their own: the TOTP challenge is a login flow requesting a higher assurance leve
 setup is a settings flow. The implementation branches on what the flow asks for, not on
 where the user is in it.
 
-![Signing in with two-step verification already set up. Six cells with paste and arrow-key traversal, Verify disabled until the code is complete — a wrong code rejected before the real one lands.](/work/janus-totp-challenge.mp4)
+![Signing in with two-step verification already set up. Six cells with paste and arrow-key traversal, Verify disabled until the code is complete — a wrong code rejected before the real one lands.](/work/signin-totp-challenge.mp4)
 
 A wrong code follows the same rule as a wrong password — fixable right now, so it stays on
 the page and the flow survives — with a message that says only that the code didn't match.
@@ -127,7 +127,7 @@ second factor at sign-in, but not that one exists. So the gate sits at the conse
 the moment an OAuth session would be issued — and refuses to issue one while enrolment is
 outstanding, diverting the user into setup and resuming the original flow afterwards.
 
-![Signing in, correcting a wrong password, then diverted into enrolment: scanning or copying the secret, confirming with a code, a rejected one along the way before the real one lands.](/work/janus-totp-setup.mp4)
+![Signing in, correcting a wrong password, then diverted into enrolment: scanning or copying the secret, confirming with a code, a rejected one along the way before the real one lands.](/work/signin-totp-setup.mp4)
 
 It defers rather than traps: "Cancel and set up later" exists because a user locked out at
 sign-in with no way past is a support call. The pending challenge crosses the detour in a

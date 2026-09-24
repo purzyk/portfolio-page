@@ -120,8 +120,8 @@ export const WORK: WorkItem[] = [
     },
   },
   {
-    slug: 'janus',
-    title: 'Janus',
+    slug: 'sign-in',
+    title: 'Sign-in service',
     kind: 'sign-in for seven brands',
     company: 'talksome',
     period: '2025–2026',
@@ -130,16 +130,16 @@ export const WORK: WorkItem[] = [
       'One sign-in service, seven reseller brands. Each gets its own domain, logo and palette from the same deployment. Underneath: an OAuth 2.0 flow where the access token stays server-side and never reaches the browser.',
     stack: ['Next.js', 'Ory Kratos · Hydra', 'OAuth 2.0 · OIDC'],
     link: 'case-study',
-    caseStudy: 'janus-multi-brand-auth',
+    caseStudy: 'multi-brand-sign-in',
     image: {
-      src: '/work/janus-login-studio.png',
-      alt: 'Janus sign-in screen in the Studio brand — blue accent on a navy ground',
+      src: '/work/signin-login-studio.png',
+      alt: 'Sign-in screen in the Studio brand — blue accent on a navy ground',
       width: 1440,
       height: 900,
     },
     clip: {
-      src: '/work/janus-totp-setup.mp4',
-      poster: '/work/janus-totp-setup-poster.jpg',
+      src: '/work/signin-totp-setup.mp4',
+      poster: '/work/signin-totp-setup-poster.jpg',
       caption:
         'Signing in, correcting a wrong password, and setting up two-step verification — including a rejected code before the right one lands.',
     },
