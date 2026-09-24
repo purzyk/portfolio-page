@@ -16,7 +16,7 @@ const SECTIONS = [
     heading: 'Personal data',
     body: [
       'This site has no forms and collects nothing through them — there is nowhere on it that submits a name, email address or message to a server. The one contact point, the email link in the footer, opens your own email client; the address never passes through this site.',
-      'The only personal data this site can end up processing is whatever your browser sends automatically (see “Server logs” below) and, if you accept analytics, the aggregate, non-identifying statistics Google Analytics produces from your visit.',
+      'The only personal data this site can end up processing is whatever your browser sends automatically (see “Server logs” below) and, if you accept analytics, the aggregate, non-identifying statistics Google Analytics produces from your visit. GoatCounter (see below) counts page views without storing your IP address.',
     ],
   },
   {
@@ -30,8 +30,15 @@ const SECTIONS = [
   {
     heading: 'Google Analytics',
     body: [
-      'When accepted, this site uses Google Analytics (GA4) to see which pages get read and roughly how — nothing more granular than that. No advertising, remarketing or cross-site tracking product is enabled alongside it, and no other tracker (Facebook Pixel, Google Ads, Tag Manager) is present on this site.',
+      'When accepted, this site uses Google Analytics (GA4) to see which pages get read and roughly how — nothing more granular than that. No advertising, remarketing or cross-site tracking product is enabled alongside it, and no other tracker (Facebook Pixel, Google Ads, Tag Manager) is present on this site besides the cookieless counter below.',
       'You can withdraw acceptance at any time from “Cookie settings” in the footer, which reopens this choice. Withdrawing doesn’t retroactively delete data Google has already recorded — see Google’s own privacy policy for that.',
+    ],
+  },
+  {
+    heading: 'GoatCounter',
+    body: [
+      'Separately from Google Analytics, this site counts page views with GoatCounter, a privacy-friendly analytics service. It sets no cookies, stores nothing in your browser and does not store your IP address — only the page visited, the referring site and coarse browser, screen-size and country information, aggregated into totals.',
+      'Because it neither stores nor reads anything on your device and identifies no one, it runs without asking for consent. See GoatCounter’s own privacy policy at goatcounter.com for details.',
     ],
   },
   {
