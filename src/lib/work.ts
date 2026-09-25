@@ -1,5 +1,5 @@
 /**
- * The six work items.
+ * The seven work items.
  *
  * Structured data rather than Markdown: this is a fixed list rendered as UI, and the
  * pane needs typed fields (stack list, link kind, image dimensions) rather than a body
@@ -142,6 +142,38 @@ export const WORK: WorkItem[] = [
       poster: '/work/signin-totp-setup-poster.jpg',
       caption:
         'Signing in, correcting a wrong password, and setting up two-step verification — including a rejected code before the right one lands.',
+    },
+  },
+  {
+    slug: 'recast',
+    title: 'Recast',
+    kind: 'application tracker · AI CV tailoring',
+    // Shown where freelance rows show "freelance": this one wasn't for a client.
+    company: 'personal',
+    group: 'freelance',
+    year: '2026',
+    stackShort: 'next.js · claude',
+    blurb:
+      'An application tracker that warns you before you apply to the same role twice, and tailors a CV and cover letter to each posting with Claude. Every line cites the experience it came from, and requirements the experience can’t back up are listed instead of papered over.',
+    stack: ['Next.js 16', 'TypeScript', 'Claude API', 'Postgres · Prisma', 'Docker · Cloud Run'],
+    link: 'case-study',
+    caseStudy: 'recast-cv-tailoring',
+    // The app itself sits behind a single-user sign-in, so the code is the public part.
+    demo: {
+      href: 'https://github.com/purzyk/recast',
+      note: 'Source on GitHub',
+    },
+    image: {
+      src: '/work/recast-board.png',
+      alt: 'The Recast board: applications in Saved, Applied, Interview, Offer and Rejected columns',
+      width: 1440,
+      height: 900,
+    },
+    clip: {
+      src: '/work/recast-tailoring.mp4',
+      poster: '/work/recast-tailoring-poster.jpg',
+      caption:
+        'Opening an application, generating a tailored CV (sped up), and landing on the review with the posting’s requirements underlined.',
     },
   },
   {

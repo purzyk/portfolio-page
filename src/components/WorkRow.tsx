@@ -94,7 +94,7 @@ export function WorkRow({ item, selected, href, onSelect, startsGroup = false }:
               at the 320px rail width. */}
           <p className='mt-1 truncate font-mono text-meta text-ink-muted'>
             {compact
-              ? [item.group, item.stackShort].filter(Boolean).join(' · ')
+              ? [item.company ?? item.group, item.stackShort].filter(Boolean).join(' · ')
               : item.kind}
           </p>
         </div>

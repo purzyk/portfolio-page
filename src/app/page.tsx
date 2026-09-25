@@ -4,7 +4,7 @@ import { WorkBrowser } from '@/components/WorkBrowser'
 /**
  * The work page — the two-pane window, and the page that matters.
  *
- * Desktop: a 400px rail holding the bio and all six items, beside a pane showing one.
+ * Desktop: a 400px rail holding the bio and all seven items, beside a pane showing one.
  * The list stays visible while you read about a project, so promotion is a state
  * (pinned, filled, already open) rather than a bigger card.
  *
