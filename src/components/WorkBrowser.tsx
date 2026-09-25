@@ -87,16 +87,13 @@ export function WorkBrowser({ initialSlug }: { initialSlug?: string }) {
         {/* The list scrolls independently of the pane once the window is height-pinned,
             so a long list can't push the footer down or make the pane scroll with it. */}
         <ul className='min-w-0 lg:min-h-0 lg:flex-1 lg:overflow-y-auto'>
-          {WORK.map((item, index) => (
+          {WORK.map((item) => (
             <WorkRow
               key={item.slug}
               item={item}
               selected={item.slug === selected.slug}
               href={`/work/${item.slug}`}
               onSelect={() => select(item.slug)}
-              // A blank row's worth of space separates Talksome from freelance, so the
-              // split is legible without a heading.
-              startsGroup={item.group === 'freelance' && WORK[index - 1]?.group === 'talksome'}
             />
           ))}
         </ul>

@@ -24,17 +24,13 @@ interface WorkRowProps {
    * works, and without JS the link navigates normally.
    */
   onSelect?: () => void
-  /** First row of the freelance group — takes the space that separates the two. */
-  startsGroup?: boolean
 }
 
-export function WorkRow({ item, selected, href, onSelect, startsGroup = false }: WorkRowProps) {
+export function WorkRow({ item, selected, href, onSelect }: WorkRowProps) {
   const compact = item.group === 'freelance'
 
   return (
-    // The group break is space on the row rather than a wrapper element: a <ul> may
-    // only contain <li>, and a spacer div here would also orphan a border.
-    <li className={startsGroup ? 'mt-6' : undefined}>
+    <li>
       <Link
         href={href}
         aria-current={selected ? 'true' : undefined}

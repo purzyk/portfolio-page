@@ -151,18 +151,3 @@ request through until an `authorized` callback is added. `/` returned 200 withou
 in until I checked it route by route.
 
 ![The same review in the dark theme. Both themes shipped from the start.](/work/recast-review-dark.png)
-
----
-
-## What I'd do differently
-
-- **Start from the document, not the prompt.** The unusable first CV cost a full rebuild of
-  tailoring. The master CV already existed, and treating it as the output format from day
-  one would have skipped that.
-- **Measure the cost before writing it down.** The plan estimated a couple of cents per
-  generation. A tailored CV actually costs about $0.15–0.25 on the model it runs. That's
-  cheap per application, but the estimate was off by an order of magnitude, and I only
-  found out because each version records its token counts.
-- **Keep the source in view on long reviews.** The posting column scrolls away with the CV,
-  so halfway down a long draft there's nothing left to check a bullet against. I noticed it
-  while recording the clips for this page.
